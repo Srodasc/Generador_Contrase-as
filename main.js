@@ -13,7 +13,8 @@ function generar() {
 
     if (numeroDigitado < 8) {
         alert("Para la cantidad de caracteres tiene que ser mayor o igual a 8");
-        return;
+        return limpiar();
+        
     }
 
     let password = '';
@@ -71,6 +72,9 @@ function validarContrasena() {
 
 function limpiar() {
     document.getElementById('contrasena').value = '';
+    document.getElementById('cantidad').value='';
+    mensaje.textContent='';
+    mensaje.classList.remove("border_notificacion");
 }
 
 
