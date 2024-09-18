@@ -2,7 +2,9 @@ let cantidad = document.getElementById('cantidad');
 let boton = document.getElementById('generar');
 let contrasena= document.getElementById('contrasena');
 
-const cadenaCaracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!.';
+const cadenaCaracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+const cadenaStringsMayus=/^[A-Z]/;
+const cadenaStringEspecial='!@#$%^&*()';
 
 function generar() {
 
@@ -13,18 +15,32 @@ function generar() {
     }
 
     let password='';
+    
     for(let i=0;i < numeroDigitado; i++){
         let caracterAleateorio = cadenaCaracteres[Math.floor((Math.random() * cadenaCaracteres.length))];
 
         console.log(caracterAleateorio);
 
         password+=caracterAleateorio;
+        
 
         console.log(password);
-    }
+
+    }   
     console.log('ContraseÑa generada: '+password);
     contrasena.value=password;
+}
 
+function validar(){
+
+    return cadenaStringsMayus.test(password);
+
+}
+
+console.log(cadenaStringsMayus(password));
+
+function limpiar(){
+    document.getElementById('contrasena').value ='';
 }
 
 
