@@ -1,10 +1,11 @@
 let cantidad = document.getElementById('cantidad');
 let boton = document.getElementById('generar');
-let contrasena= document.getElementById('contrasena');
+let contrasena = document.getElementById('contrasena');
+let mensaje =document.getElementById('mensaje');
 
 const cadenaCaracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-const cadenaStringsMayus=/^[A-Z]/;
-const cadenaStringEspecial='!@#$%^&*()';
+const cadenaStringsMayus = /[A-Z]/;
+const cadenaStringEspecial = /[!@#$%^&*()]/;
 
 function generar() {
 
@@ -12,35 +13,47 @@ function generar() {
 
     if (numeroDigitado < 8) {
         alert("Para la cantidad de caracteres tiene que ser mayor o igual a 8");
+        return;
+    } 
+
+        let password = '';
+
+        for (let i = 0; i < numeroDigitado; i++) {
+            let caracterAleateorio = cadenaCaracteres[Math.floor((Math.random() * cadenaCaracteres.length))];
+
+
+            password += caracterAleateorio;
+
+            
+
+        }
+        console.log('ContraseÑa generada: ' + password);
+        contrasena.value = password;
+        validarMayuscula(password);
     }
 
-    let password='';
-    
-    for(let i=0;i < numeroDigitado; i++){
-        let caracterAleateorio = cadenaCaracteres[Math.floor((Math.random() * cadenaCaracteres.length))];
+function validarMayuscula(password) {
+    const tieneMayuscula = cadenaStringsMayus.test(password);
+    const tieneNumero = /[0-9]/.test(password);
+    const caracterEspecial = cadenaStringEspecial.test(password);
 
-        console.log(caracterAleateorio);
+    if(tieneMayuscula && tieneNumero && caracterEspecial){
+        mensaje.textContent="Contreña Segura";
+        mensaje.style.color="green";
+    } else {
+        mensaje.textContent="Contraseña insegura";
+        mensaje.style.color="red";
+    }
 
-        password+=caracterAleateorio;
-        
 
-        console.log(password);
-
-    }   
-    console.log('ContraseÑa generada: '+password);
-    contrasena.value=password;
+    console.log("Especial " + caracterEspecial);
+    console.log("Number " + tieneNumero);
+    console.log("Tiene mAyus" + tieneMayuscula);
+    console.log(mensaje);
 }
 
-function validar(){
-
-    return cadenaStringsMayus.test(password);
-
-}
-
-console.log(cadenaStringsMayus(password));
-
-function limpiar(){
-    document.getElementById('contrasena').value ='';
+function limpiar() {
+    document.getElementById('contrasena').value = '';
 }
 
 
